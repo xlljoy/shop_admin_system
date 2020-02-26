@@ -1,0 +1,8 @@
+package com.xlljoy.o2o.service;
+
+import com.xlljoy.o2o.entity.Shop;
+
+public interface ShopService {
+	int addShop(Shop shop);
+	int updateShop(Shop shop);
+}

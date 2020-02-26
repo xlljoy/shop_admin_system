@@ -1,0 +1,13 @@
+package o2o;
+
+import java.sql.Date;
+
+public class Zone {
+	private Integer zoneId;
+	private String name;
+	private Integer priority;
+	private Date createTime;
+	private Date updateTime;
+	
+	
+}

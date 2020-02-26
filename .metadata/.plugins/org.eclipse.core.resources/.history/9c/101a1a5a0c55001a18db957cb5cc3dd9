@@ -1,0 +1,9 @@
+package com.xlljoy.o2o.dao;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class ZoneDaoTest {
+	@Autowired
+	ZoneDao zone;
+	
+}

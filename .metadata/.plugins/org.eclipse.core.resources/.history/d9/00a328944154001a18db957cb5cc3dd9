@@ -1,0 +1,7 @@
+package enums;
+public enum Authority1 {
+	  LOW, // normal user
+	  MEDIUM, // shop worker
+	  HIGH, // shop owner
+	  SUPER // superadmin
+}

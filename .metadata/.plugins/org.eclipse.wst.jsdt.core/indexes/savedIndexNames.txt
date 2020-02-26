@@ -1,0 +1,9 @@
+INDEX VERSION 1.4+/home/jli/Documents/programming/Practice0220/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2539544101.index
+2867053777.index
+293106502.index
+3160306792.index
+3598399576.index
+2018556973.index
+1822155486.index
+2290647104.index

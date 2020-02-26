@@ -1,0 +1,15 @@
+package o2o;
+
+import java.sql.Date;
+
+public class User {
+
+	private Integer id;
+	private String name;
+	private String headImg;
+	private String email;
+	private Date createTime;
+	private Date updateTime;
+	private Authority authority;
+	private Inte
+}

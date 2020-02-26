@@ -1,0 +1,11 @@
+/**
+ * 
+ */
+$(function(){
+	var initUrl = '/shopadmin/getshopinitinfo';
+	var registerShopUrl = '/shopadmin/registershop';
+	alert(initUrl);
+	function getShopInitInfo(){
+		$.getJSON(initUrl, funtion(data){})
+	}
+})

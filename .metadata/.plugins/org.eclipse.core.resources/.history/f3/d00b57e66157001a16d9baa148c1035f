@@ -1,0 +1,13 @@
+package com.xlljoy.o2o.util;
+
+public class PathUtil {
+	public static String getImgBasePath() {
+		String oString = System.getProperty("os.name");
+		String basePath = "";
+		if (oString.toLowerCase().startsWith("win")) {
+			basePath = "D:/project/images/";
+		} else {
+			basePath = "/home/jli/Pictures/";
+		}
+	}
+}

@@ -1,0 +1,25 @@
+package com.xlljoy.o2o.dao;
+
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.xlljoy.o2o.BaseTest;
+import com.xlljoy.o2o.entity.Shop;
+import com.xlljoy.o2o.entity.User;
+
+public class ShopDaoTest extends BaseTest{
+	@Autowired
+	private ShopDao shopDao;
+	
+	@Test
+	public void testInsertShop() {
+		Shop shop = new Shop();
+		shop.setAddr("lalalla");
+		shop.setName("milkeTea");
+		shop.setOwner(new User());
+		int effect = shopDao.insertShop(shop);
+		assertEquals(1, effect);
+	}
+}

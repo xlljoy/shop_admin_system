@@ -1,0 +1,27 @@
+package com.xlljoy.o2o.util;
+
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+
+public class ImageUtil {
+	public static String generateThumbnail(CommonsMultipartFile file, String targetAddr) {
+		String realFileName = getRandomFileName();
+		String fileExtension = getFileExtention(file);
+		makeDirPath(targetAddr);
+		String relativeAddr = targetAddr + realFileName +fileExtension;
+		File dest = new File(relativeAddr);
+	}
+	public static void main(String[] args) throws IOException {
+		String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+		Thumbnails.of(new File("/home/jli/Pictures/pic1.jpg")).size(200, 200)
+			.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f)
+			.outputQuality(0.8f).toFile("/home/jli/Pictures/pic2.jpg");
+	}
+}

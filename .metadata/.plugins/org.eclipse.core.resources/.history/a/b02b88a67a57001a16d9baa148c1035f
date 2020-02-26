@@ -1,0 +1,58 @@
+package com.xlljoy.o2o.service.impl;
+
+import java.io.File;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.xlljoy.o2o.dao.ShopDao;
+import com.xlljoy.o2o.dto.ShopExecution;
+import com.xlljoy.o2o.entity.Shop;
+import com.xlljoy.o2o.enums.ShopStateEnum;
+import com.xlljoy.o2o.exceptions.ShopException;
+import com.xlljoy.o2o.service.ShopService;
+import com.xlljoy.o2o.util.ImageUtil;
+import com.xlljoy.o2o.util.PathUtil;
+
+@Service
+public class ShopServiceImpl implements ShopService{
+	@Autowired
+	private ShopDao shopDao;
+	
+	@Override
+	@Transactional
+	public ShopExecution addShop(Shop shop, File img) {
+		if (shop == null) return new ShopExecution(ShopStateEnum.NULL_SHOP);
+		if (!img.exists()) return new ShopExecution(ShopStateEnum.NULL_IMG);
+		try {
+			
+		} catch(ShopException e) {
+			throw new ShopException("failed to add a new shop");
+		}
+		
+		shop.setEnableStatus(0);
+		shop.setCreateTime(new Date());
+		shop.setUpdateTime(new Date());
+		String imgPath = addImg(img, shop.getId());
+		shop.setImg(imgPath);
+		int effect = shopDao.insertShop(shop);
+		if (effect < 1) {
+			throw new ShopException("failed to add a new shop");
+		}
+		return new ShopExecution(ShopStateEnum.CHECK);
+	}
+	
+	public String addImg(File img, Long shopId) {
+		return ImageUtil.generateThumbnail(img, PathUtil.getShopImgPath(shopId));
+	}
+
+	@Override
+	public ShopExecution updateShop(Shop shop) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map>
+<namespace="com.xlljoy.o2o.ShopCategoryDao"/>
+<select id="queryShopCategory" useGeneratedKey="true" 
+	returnType="com.xlljoy.o2o.entity.ShopCategory" columnId="id" keyType="id">
+	SELECT id, name, category_desc, img, 
+		priority, createTime, updateTime, parent_id
+		FROM
+		tb_shop_category
+</select>
+</map>

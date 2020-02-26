@@ -1,0 +1,12 @@
+com/xlljoy/o2o/entity/ShopCategory.class
+com/xlljoy/o2o/dao/ZoneDao.class
+com/xlljoy/o2o/entity/Shop.class
+com/xlljoy/o2o/entity/User.class
+com/xlljoy/o2o/entity/ProductImg.class
+com/xlljoy/o2o/entity/Product.class
+com/xlljoy/o2o/entity/Zone.class
+com/xlljoy/o2o/entity/LocalAccount.class
+com/xlljoy/o2o/entity/DailyNew.class
+com/xlljoy/o2o/entity/WechatAccount.class
+com/xlljoy/o2o/entity/ProductCategory.class
+com/xlljoy/o2o/enums/Authority.class

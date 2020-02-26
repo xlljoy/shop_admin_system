@@ -1,0 +1,14 @@
+package com.xlljoy.o2o.dto;
+
+import com.xlljoy.o2o.entity.Shop;
+
+public class ShopExecution {
+	// result status
+	private int state;
+	// status information
+	private String stateInfo;
+	// current shop which we are working on
+	private Shop shop;
+	//shop amount
+	private int count;
+}

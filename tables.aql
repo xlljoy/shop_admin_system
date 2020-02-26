@@ -1,0 +1,138 @@
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_zone` (
+  `zone_id` int(2) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  `priority` int(2) NOT NULL DEFAULT '0',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`zone_id`),
+  UNIQUE KEY `UK_ZONE` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+
+///----------------------enum authority
+
+CREATE TABLE `tb_enum-authority` (
+    col ENUM ('LOW','MEDIUM','HIGH', 'SUPER')
+);
+
+
+///-------------------------- user
+
+DROP TABLE IF EXISTS `tb_user`;
+CREATE TABLE `tb_user` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `head_img` varchar(1024) DEFAULT NULL,
+  `email` varchar(1024) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `authority` ENUM('LOW','MEDIUM','HIGH', 'SUPER') NOT NULL DEFAULT 'LOW',
+  `gender` varchar(10) DEFAULT NULL,
+  `enableStatus` int(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+///-------------------------------wechat account
+
+DROP TABLE IF EXISTS `tb_local_account`;
+CREATE TABLE `tb_local_account` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_local_prfile` (`user_name`),
+  constraint `fk_localaccount_profile` foreign key (`user_id`) references `tb_user` (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+//---------------------------------local account 
+
+DROP TABLE IF EXISTS `tb_wechat_account`;
+CREATE TABLE `tb_wechat_account` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL,
+  `open_id` varchar(1024) NOT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  constraint `fk_wechataccount_profile` foreign key (`user_id`) references `tb_user`(`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+///-------------------------------------------------shop category
+
+
+DROP TABLE IF EXISTS `tb_shop_category`;
+CREATE TABLE `tb_shop_category` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `category_desc` varchar(1024) NOT NULL,
+  `img` varchar(1024) NOT NULL,
+  `priority` int(3) DEFAULT '0',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `parent_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_parent_category` (`parent_id`),
+  constraint `fk_parent_category` foreign key (`parent_id`) references `tb_shop_category` (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+///--------------------------shop 
+DROP TABLE IF EXISTS `tb_shop`;
+CREATE TABLE `tb_shop` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `owner_id` int(10) NOT NULL,
+  `zone_id` int(2) DEFAULT NULL,
+  `priority` int(3) DEFAULT '0',
+  `shop_desc` varchar(1024) DEFAULT NULL,
+  `advice` varchar(1024) DEFAULT NULL,
+  `addr` varchar(1024) DEFAULT NULL,
+  `phone` varchar(1024) DEFAULT NULL,
+  `img` varchar(1024) DEFAULT NULL,
+  `enable_status` int(2) NOT NULL DEFAULT '0',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `shop_category_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  constraint `fk_shop_owner` foreign key (`owner_id`) references `tb_user` (`id`),
+  constraint `fk_shop_zone` foreign key (`zone_id`) references `tb_zone` (`zone_id`),
+  constraint `fk_shop_category` foreign key (`shop_category_id`) references `tb_shop_category` (`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+//-----------------product
+CREATE TABLE `tb_product` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `product_desc` varchar(2000) DEFAULT NULL,
+  `img_addr` varchar(2000) DEFAULT '',
+  `normal_price` varchar(100) DEFAULT NULL,
+  `promotion_price` varchar(100) DEFAULT NULL,
+  `priority` int(3) NOT NULL DEFAULT '0',
+  `point` int(10) NOT NULL DEFAULT '0',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `enable_status` int(2) NOT NULL DEFAULT '0',
+  `product_category_id` int(10) DEFAULT NULL,
+  `shop_id` int(10) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_product_procate` FOREIGN KEY (`product_category_id`) REFERENCES `tb_product_category` (`id`),
+  CONSTRAINT `fk_product_shop` FOREIGN KEY (`shop_id`) REFERENCES `tb_shop` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+
+///---------------------product img-----------------
+CREATE TABLE `tb_product_img` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `img_addr` varchar(1024) NOT NULL,
+  `img_desc` varchar(1024) DEFAULT NULL,
+  `priority` int(3) DEFAULT '0',
+  `create_time` datetime DEFAULT NULL,
+  `product_id` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `fk_product` FOREIGN KEY (`product_id`) REFERENCES `tb_product` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;

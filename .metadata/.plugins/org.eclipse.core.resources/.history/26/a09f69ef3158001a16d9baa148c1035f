@@ -1,0 +1,5 @@
+package com.xlljoy.o2o.dao;
+
+public class ShopCategoryDao {
+
+}

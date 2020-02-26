@@ -1,0 +1,35 @@
+package com.xlljoy.o2o.web.superadmin;
+
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.xlljoy.o2o.entity.Zone;
+import com.xlljoy.o2o.service.ZoneService;
+
+@Controller
+@RequestMapping("/superadmin")
+public class ZoneController {
+	@Autowired
+	private ZoneService zoneService;
+	
+	@RequestMapping("/getzonelist")
+	private Map<String, Object> listZone(){
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		try {
+			List<Zone> zoneList = zoneService.getZoneList();
+			modelMap.put("zoneList", zoneList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelMap.put("success", false);
+			modelMap.put("errMsg", e.toString());
+		}
+		
+		
+		return modelMap;
+	}
+}

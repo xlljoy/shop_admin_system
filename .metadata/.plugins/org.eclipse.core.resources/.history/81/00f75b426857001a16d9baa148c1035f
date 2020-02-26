@@ -1,0 +1,61 @@
+package com.xlljoy.o2o.util;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+
+import javax.imageio.ImageIO;
+
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+
+public class ImageUtil {
+	static String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+	private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+	public static String generateThumbnail(CommonsMultipartFile file, String targetAddr) {
+		String realFileName = getRandomFileName();
+		String fileExtension = getFileExtention(file);
+		makeDirPath(targetAddr);
+		String relativeAddr = targetAddr + realFileName +fileExtension;
+		File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
+		
+		try {
+			Thumbnails.of(file.getInputStream()).size(200, 200)
+					.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f)
+					.outputQuality(0.8f).toFile(dest);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return dest.getAbsolutePath();
+	}
+	public static String getRandomFileName() {
+		int n = new Random().nextInt(8) + 10000;
+		return simpleDateFormat.format(new Date()) + n;
+	}
+	
+	public static String getFileExtention (CommonsMultipartFile file) {
+		return FilenameUtils.getExtension(file.getOriginalFilename());
+	}
+	
+	public static void makeDirPath(String targetAddr) {
+		 String[] arrOfStr = targetAddr.split("/"); 
+		 String filePath = "";
+		 for (String string : arrOfStr) {
+			 filePath = filePath + "/" + string;
+			 File file = new File(filePath);
+			 if (!file.exists()) {
+				 file.mkdir();
+			 }
+		 }
+	}
+	public static void main(String[] args) throws IOException {
+		Thumbnails.of(new File("/home/jli/Pictures/pic1.jpg")).size(200, 200)
+			.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f)
+			.outputQuality(0.8f).toFile("/home/jli/Pictures/pic2.jpg");
+	}
+}

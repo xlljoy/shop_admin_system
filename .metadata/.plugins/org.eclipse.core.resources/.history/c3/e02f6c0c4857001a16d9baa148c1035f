@@ -1,0 +1,48 @@
+package com.xlljoy.o2o.web.superadmin;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.logging.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.xlljoy.o2o.entity.Zone;
+import com.xlljoy.o2o.service.ZoneService;
+
+import ch.qos.logback.classic.Logger;
+
+@Controller
+@RequestMapping("/superadmin")
+public class ZoneController {
+	
+	org.mybatis.logging.Logger logger = LoggerFactory.getLogger(ZoneController.class);
+	@Autowired
+	private ZoneService zoneService;
+	
+	@RequestMapping(value="/listzone", method=RequestMethod.GET)
+	@ResponseBody
+	private Map<String, Object> listZone(){
+		logger.info("=====start ===========");
+		long startTime = System.currentTimeMillis();
+		Map<String, Object> modelMap = new HashMap<String, Object>();
+		try {
+			List<Zone> zoneList = zoneService.getZoneList();
+			modelMap.put("rows", zoneList);
+			modelMap.put("total", zoneList.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+			modelMap.put("success", false);
+			modelMap.put("errMsg", e.toString());
+		}		
+		logger.error("test error");
+		long endTime = System.currentTimeMillis();
+		logger.debug("duration: [{}ms] ", endTime - startTime);
+		logger.info("=====end===========");
+		return modelMap;
+	}
+}

@@ -1,0 +1,14 @@
+package com.xlljoy.o2o.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.xlljoy.o2o.entity.Zone;
+
+@Service
+public interface ZoneService {
+	
+	List<Zone> getZoneList();
+	
+}

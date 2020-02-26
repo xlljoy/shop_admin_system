@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+$(function(){
+	var initUrl = '/shopadmin/getshopinitinfo';
+	var registerShopUrl = '/shopadmin/registershop';
+	alert(initUrl);
+	function getShopInitInfo(){
+		$.getJSON(initUrl,function(data){
+			if(data.success){
+				var tempZoneHtml = '';
+				var tempShopCateHtml = '';
+				data.zoneList.map(function(item,index){
+					tempZoneHtml += '<option data-id="' + item.zoneId + '">'
+					+ item.name + '</option>';
+				});
+			}
+		})
+	}
+})

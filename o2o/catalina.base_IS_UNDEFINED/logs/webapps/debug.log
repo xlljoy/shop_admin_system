@@ -1,0 +1,48 @@
+2020-02-26 10:41:03.989 [359024293@qtp-1268447657-3] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==>  Preparing: SELECT zone_id,name,update_time,create_time,priority FROM tb_zone ORDER BY priority DESC 
+2020-02-26 10:41:04.022 [359024293@qtp-1268447657-3] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==> Parameters: 
+2020-02-26 10:41:04.040 [359024293@qtp-1268447657-3] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - <==      Total: 2
+2020-02-26 10:41:04.060 [359024293@qtp-1268447657-3] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==>  Preparing: SELECT id, name, category_desc, img, priority, create_time, update_time, parent_id FROM tb_shop_category ORDER BY priority DESC 
+2020-02-26 10:41:04.060 [359024293@qtp-1268447657-3] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==> Parameters: 
+2020-02-26 10:41:04.062 [359024293@qtp-1268447657-3] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - <==      Total: 4
+2020-02-26 10:41:05.370 [359024293@qtp-1268447657-3] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==>  Preparing: SELECT zone_id,name,update_time,create_time,priority FROM tb_zone ORDER BY priority DESC 
+2020-02-26 10:41:05.371 [359024293@qtp-1268447657-3] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==> Parameters: 
+2020-02-26 10:41:05.374 [359024293@qtp-1268447657-3] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - <==      Total: 2
+2020-02-26 10:41:05.375 [359024293@qtp-1268447657-3] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==>  Preparing: SELECT id, name, category_desc, img, priority, create_time, update_time, parent_id FROM tb_shop_category ORDER BY priority DESC 
+2020-02-26 10:41:05.376 [359024293@qtp-1268447657-3] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==> Parameters: 
+2020-02-26 10:41:05.380 [359024293@qtp-1268447657-3] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - <==      Total: 4
+2020-02-26 10:42:25.003 [1330100610@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==>  Preparing: SELECT zone_id,name,update_time,create_time,priority FROM tb_zone ORDER BY priority DESC 
+2020-02-26 10:42:25.119 [1330100610@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==> Parameters: 
+2020-02-26 10:42:25.136 [1330100610@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - <==      Total: 2
+2020-02-26 10:42:25.154 [1330100610@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==>  Preparing: SELECT id, name, category_desc, img, priority, create_time, update_time, parent_id FROM tb_shop_category ORDER BY priority DESC 
+2020-02-26 10:42:25.154 [1330100610@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==> Parameters: 
+2020-02-26 10:42:25.156 [1330100610@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - <==      Total: 4
+2020-02-26 11:00:08.593 [1330100610@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==>  Preparing: SELECT zone_id,name,update_time,create_time,priority FROM tb_zone ORDER BY priority DESC 
+2020-02-26 11:00:08.616 [1330100610@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==> Parameters: 
+2020-02-26 11:00:08.639 [1330100610@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - <==      Total: 2
+2020-02-26 11:00:08.658 [1330100610@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==>  Preparing: SELECT id, name, category_desc, img, priority, create_time, update_time, parent_id FROM tb_shop_category ORDER BY priority DESC 
+2020-02-26 11:00:08.658 [1330100610@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==> Parameters: 
+2020-02-26 11:00:08.660 [1330100610@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - <==      Total: 4
+2020-02-26 11:20:07.181 [1330100610@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==>  Preparing: SELECT zone_id,name,update_time,create_time,priority FROM tb_zone ORDER BY priority DESC 
+2020-02-26 11:20:07.207 [1330100610@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==> Parameters: 
+2020-02-26 11:20:07.231 [1330100610@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - <==      Total: 2
+2020-02-26 11:20:07.250 [1330100610@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==>  Preparing: SELECT id, name, category_desc, img, priority, create_time, update_time, parent_id FROM tb_shop_category ORDER BY priority DESC 
+2020-02-26 11:20:07.250 [1330100610@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==> Parameters: 
+2020-02-26 11:20:07.253 [1330100610@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - <==      Total: 4
+2020-02-26 11:25:08.425 [359024293@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==>  Preparing: SELECT zone_id,name,update_time,create_time,priority FROM tb_zone ORDER BY priority DESC 
+2020-02-26 11:25:08.450 [359024293@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==> Parameters: 
+2020-02-26 11:25:08.473 [359024293@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - <==      Total: 2
+2020-02-26 11:25:08.493 [359024293@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==>  Preparing: SELECT id, name, category_desc, img, priority, create_time, update_time, parent_id FROM tb_shop_category WHERE parent_id is not null ORDER BY priority DESC 
+2020-02-26 11:25:08.493 [359024293@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==> Parameters: 
+2020-02-26 11:25:08.494 [359024293@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - <==      Total: 1
+2020-02-26 11:26:32.993 [359024293@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==>  Preparing: SELECT zone_id,name,update_time,create_time,priority FROM tb_zone ORDER BY priority DESC 
+2020-02-26 11:26:32.993 [359024293@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==> Parameters: 
+2020-02-26 11:26:32.994 [359024293@qtp-1268447657-2] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - <==      Total: 2
+2020-02-26 11:26:32.995 [359024293@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==>  Preparing: SELECT id, name, category_desc, img, priority, create_time, update_time, parent_id FROM tb_shop_category WHERE parent_id is not null ORDER BY priority DESC 
+2020-02-26 11:26:32.995 [359024293@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==> Parameters: 
+2020-02-26 11:26:32.996 [359024293@qtp-1268447657-2] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - <==      Total: 1
+2020-02-26 11:28:41.533 [1933312620@qtp-1268447657-3] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==>  Preparing: SELECT zone_id,name,update_time,create_time,priority FROM tb_zone ORDER BY priority DESC 
+2020-02-26 11:28:41.535 [1933312620@qtp-1268447657-3] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - ==> Parameters: 
+2020-02-26 11:28:41.541 [1933312620@qtp-1268447657-3] DEBUG com.xlljoy.o2o.dao.ZoneDao.queryZone - <==      Total: 2
+2020-02-26 11:28:41.544 [1933312620@qtp-1268447657-3] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==>  Preparing: SELECT id, name, category_desc, img, priority, create_time, update_time, parent_id FROM tb_shop_category WHERE parent_id is not null ORDER BY priority DESC 
+2020-02-26 11:28:41.545 [1933312620@qtp-1268447657-3] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - ==> Parameters: 
+2020-02-26 11:28:41.552 [1933312620@qtp-1268447657-3] DEBUG c.xlljoy.o2o.dao.ShopCategoryDao.queryShopCategory - <==      Total: 2

@@ -1,0 +1,29 @@
+package com.xlljoy.o2o.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.xlljoy.o2o.dto.ShopExecution;
+import com.xlljoy.o2o.entity.Shop;
+import com.xlljoy.o2o.enums.ShopStateEnum;
+import com.xlljoy.o2o.service.ShopService;
+
+@Service
+public class ShopServiceImpl implements ShopService{
+	@Autowired
+	private ShopService shopService;
+
+	@Override
+	public ShopExecution addShop(Shop shop) {
+		shopService.addShop(shop)
+		return null;
+	}
+
+	@Override
+	public ShopExecution updateShop(Shop shop) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+}

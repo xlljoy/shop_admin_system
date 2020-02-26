@@ -1,0 +1,5 @@
+package com.xlljoy.o2o.web.shopadmin;
+
+public class ShopAdminController {
+
+}

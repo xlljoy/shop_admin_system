@@ -1,0 +1,5 @@
+package com.xlljoy;
+
+public interface AoneDao {
+
+}

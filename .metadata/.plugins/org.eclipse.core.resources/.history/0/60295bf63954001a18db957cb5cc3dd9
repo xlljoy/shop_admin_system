@@ -1,0 +1,7 @@
+package o2o;
+
+public enum Authority {
+	  LOW,
+	  MEDIUM,
+	  HIGH
+}

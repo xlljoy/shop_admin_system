@@ -1,0 +1,18 @@
+package com.xlljoy.o2o.util;
+
+import org.omg.CORBA.PRIVATE_MEMBER;
+
+public class PathUtil {
+	private static String seperatorString = System.getProperty("file.seperator");
+	public static String getImgBasePath() {
+		String oString = System.getProperty("os.name");
+		String basePath = "";
+		if (oString.toLowerCase().startsWith("win")) {
+			basePath = "D:/project/images/";
+		} else {
+			basePath = "/home/jli/Pictures/";
+		}
+		basePath = basePath.replace("/", seperator);
+		return seperator;
+	}
+}

@@ -1,0 +1,22 @@
+package com.xlljoy.o2o.service;
+
+import static org.junit.Assert.assertEquals;
+
+import java.awt.List;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.xlljoy.o2o.BaseTest;
+import com.xlljoy.o2o.dao.ZoneDao;
+
+public class ZoneServiceTest extends BaseTest{
+	@Autowired
+	public ZoneService zoneService;
+	
+	@Test
+	public testGetZoneList() {
+		List<Zone>  zoneList = zoneService.getZoneList();
+		assertEquals(2, zoneList.size());
+	}
+}

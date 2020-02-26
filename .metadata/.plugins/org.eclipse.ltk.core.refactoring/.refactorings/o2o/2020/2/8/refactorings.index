@@ -1,0 +1,40 @@
+1582242033641	Move compilation unit
+1582244012677	Copy compilation units
+1582244032414	Delete elements
+1582244040283	Move compilation unit
+1582244058743	Move compilation unit
+1582244063809	Delete element
+1582244158126	Move 'User.java' to 'entity'
+1582244160775	Move 'Zone.java' to 'entity'
+1582244169062	Delete element
+1582244211857	Move 'User.java' to 'com.xlljoy.o2o.entity'
+1582244214835	Move 'Zone.java' to 'com.xlljoy.o2o.entity'
+1582244218207	Delete element
+1582244220575	Delete element
+1582244222674	Delete element
+1582244224964	Delete element
+1582244278828	Move file
+1582244338880	Copy compilation unit
+1582244342315	Move 'User.java' to 'com.xlljoy.o2o.entity'
+1582244347873	Delete element
+1582244379569	Delete element
+1582244410337	Delete element
+1582244414732	Delete element
+1582245037129	Delete element
+1582245042569	Delete element
+1582245046871	Delete element
+1582245076038	Rename type 'Authority'
+1582245122356	Delete element
+1582325307097	Rename type 'shop'
+1582326714209	Delete element
+1582327169221	Delete element
+1582327275404	Delete element
+1582327279219	Delete element
+1582327343948	Delete element
+1582327394274	Move 'enums' to 'o2o'
+1582327399871	Move 'entity' to 'o2o'
+1582327440540	Delete element
+1582328339255	Rename resource 'NewFile.xml'
+1582330306653	Delete element
+1582331756608	Move compilation unit
+1582333842685	Rename resource 'jdbc.property'

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<map namespace = "com.xlljoy.o2o.ShopCategoryDao">
+	<select id="queryShopCategory" 
+		resultType="com.xlljoy.o2o.entity.ShopCategory" >
+		SELECT id, name, category_desc, img, 
+			priority, createTime, updateTime, parent_id
+			FROM
+			tb_shop_category
+	</select>
+</map>
