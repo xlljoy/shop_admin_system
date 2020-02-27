@@ -28,6 +28,7 @@ import com.xlljoy.o2o.service.ShopCategoryService;
 import com.xlljoy.o2o.service.ShopService;
 import com.xlljoy.o2o.service.ZoneService;
 import com.xlljoy.o2o.util.HttpServletRequestUtil;
+import com.xlljoy.o2o.util.VerifyCodeUtil;
 
 @Controller
 @RequestMapping("/shopadmin")
@@ -62,6 +63,12 @@ public class ShopManagementController {
 	@ResponseBody
 	public Map<String, Object> addShop(HttpServletRequest request) {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
+		// check verify code 
+		if (!VerifyCodeUtil.checkVerifyCode(request)) {
+			modelMap.put("success", false);
+			modelMap.put("errMsg", "please input right verify code");
+			return modelMap;
+		}
 		// 1 get info from front end and transfer to shop.class
 		String shopStr = HttpServletRequestUtil.getString(request, "shopStr");
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -100,7 +107,7 @@ public class ShopManagementController {
 		
 		ShopExecution sExecution;
 		try {
-			sExecution = shopService.addShop(shop, shopImg.getInputStream(), shopImg.getName());
+			sExecution = shopService.addShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());
 		} catch (Exception e) {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", e.getMessage());
