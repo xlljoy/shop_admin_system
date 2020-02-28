@@ -26,7 +26,7 @@
 		</init-param>
 		<!-- word color -->
 		<init-param>
-			<param-name>kaptcha.testproducer.front.color</param-name>
+			<param-name>kaptcha.textproducer.font.color</param-name>
 			<param-value>red</param-value>
 		</init-param>
 		<!-- pic width -->
@@ -36,7 +36,7 @@
 		</init-param>
 		<!-- words including -->
 		<init-param>
-			<param-name>kaptcha.testproducer.char.string</param-name>
+			<param-name>kaptcha.textproducer.char.string</param-name>
 			<param-value>ACDEFHKPRSTWX345679</param-value>
 		</init-param>
 		<!-- image height -->
@@ -46,7 +46,7 @@
 		</init-param>
 		<!-- word size -->
 		<init-param>
-			<param-name>kaptcha.testproducer.front.size</param-name>
+			<param-name>kaptcha.textproducer.font.size</param-name>
 			<param-value>43</param-value>
 		</init-param>
 		<!-- noise color -->
@@ -56,15 +56,19 @@
 		</init-param>
 		<!-- word number -->
 		<init-param>
-			<param-name>kaptcha.testproducer.char.length</param-name>
-			<param-value>5</param-value>
+			<param-name>kaptcha.textproducer.char.length</param-name>
+			<param-value>4</param-value>
 		</init-param>
-		<!-- word front -->
+		<!-- word font -->
 		<init-param>
-			<param-name>kaptcha.testproducer.font.name</param-name>
+			<param-name>kaptcha.textproducer.font.names</param-name>
 			<param-value>Arial</param-value>
 		</init-param>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>Kaptcha</servlet-name>
+		<url-pattern>/Kaptcha</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>spring-dispatcher</servlet-name>
 		<!-- 默认匹配所有的请求 -->

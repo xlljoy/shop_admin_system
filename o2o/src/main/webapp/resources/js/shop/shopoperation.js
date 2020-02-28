@@ -25,11 +25,11 @@ $(function(){
 			}
 		});
 		
-		$('submit').click(function(){
+		$('#submit').click(function(){
 			var shop = {};
 			shop.name = $('#name').val();
 			shop.shopCategory = {
-				shopCategoryId: $('#shop-category').find('option').not(function(){
+				id: $('#shop-category').find('option').not(function(){
 				return !this.selected;
 			}).data('id')
 			};
@@ -39,7 +39,7 @@ $(function(){
 			}).data('id')
 			};
 			
-			var shopImg = $('#shop-img')[0].file[0];
+			var shopImg = $('#shop-img')[0].files[0];
 			shop.addr = $('#address').val();
 			shop.phone = $('#phone').val();
 			shop.shopDesc = $('#shop-desc').val();
@@ -47,6 +47,13 @@ $(function(){
 			var formData = new FormData();
 			formData.append('shopImg', shopImg);
 			formData.append('shopStr', JSON.stringify(shop));
+			
+			var verifyCodeActual = $('#verify_code').val();
+			if (!verifyCodeActual) {
+				$toast("please input verify code !");
+				return;
+			}
+			formData.append('verifyCodeActual', verifyCodeActual);
 			
 			$.ajax({
 				url: registerShopUrl,
@@ -62,6 +69,7 @@ $(function(){
 					else {
 						$.toast('failed ' + data.errMsg);
 					}
+					$('#verify_code_img').click();
 				}
 			});
 		});
