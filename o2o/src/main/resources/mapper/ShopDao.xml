@@ -3,6 +3,63 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xlljoy.o2o.dao.ShopDao">
+	<resultMap type="com.xlljoy.o2o.entity.Shop" id="shopMap">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="shop_desc" property="shopDesc" />
+		<result column="addr" property="addr" />
+		<result column="phone" property="phone" />
+		<result column="img" property="img" />
+		<result column="priority" property="priority" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="enable_status" property="enableStatus" />
+		<result column="advice" property="advice" />
+		<association property="zone" column="zone_id"
+			javaType="com.xlljoy.o2o.entity.Zone">
+			<id column="zone_id" property="zoneId" />
+			<result column="z_name" property="name" />
+		</association>
+		<association property="owner" column="owner_id"
+			javaType="com.xlljoy.o2o.entity.User">
+			<id column="id" property="id" />
+			<result column="name" property="name" />
+		</association>
+		<association property="shopCategory"
+			column="shop_category_id"
+			javaType="com.xlljoy.o2o.entity.ShopCategory">
+			<id column="sc_id" property="id" />
+			<result column="sc_name" property="name" />
+		</association>
+	</resultMap>
+	<select id="queryByShopId" resultMap="shopMap" parameterType="Long">
+		SELECT 
+			s.id,
+			s.name, 
+			s.shop_desc, 
+			s.addr, 
+			s.phone, 
+			s.img,
+			s.priority,
+			s.create_time, 
+			s.update_time, 
+			s.enable_status, 
+			s.advice,
+			z.zone_id,
+			z.name AS z_name,
+			sc.id AS sc_id,
+			sc.name AS sc_name
+		FROM
+		tb_shop s,
+		tb_zone z,
+		tb_shop_category sc
+		WHERE
+		s.zone_id = z.zone_id
+		AND
+		s.shop_category_id = sc.id
+		AND
+		s.id = #{shopId}
+	</select>
 	<insert id="insertShop" useGeneratedKeys="true" keyColumn="id"
 		keyProperty="id">
 		INSERT INTO
@@ -15,7 +72,8 @@
 		#{img},#{enableStatus},
 		#{createTime},#{updateTime},#{shopCategory.id})
 	</insert>
-	<update id="updateShop" parameterType="com.xlljoy.o2o.entity.Shop">
+	<update id="updateShop"
+		parameterType="com.xlljoy.o2o.entity.Shop">
 		UPDATE
 		tb_shop
 		<set>
@@ -31,7 +89,7 @@
 			<if test="zone != null">zone_id=#{zone.zoneId},</if>
 			<if test="shopCategory != null">shop_category_id=#{shopCategory.id}</if>
 		</set>
-		
+
 		where id = #{id}
 	</update>
 </mapper>

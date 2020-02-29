@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Date;
 
@@ -17,6 +18,7 @@ import com.xlljoy.o2o.entity.ShopCategory;
 import com.xlljoy.o2o.entity.User;
 import com.xlljoy.o2o.entity.Zone;
 import com.xlljoy.o2o.enums.ShopStateEnum;
+import com.xlljoy.o2o.exceptions.ShopException;
 
 public class ShopServiceTest extends BaseTest{
 	@Autowired
@@ -58,5 +60,22 @@ public class ShopServiceTest extends BaseTest{
 		}
 		assertEquals(0, shopExecution.getState());
 	}
+	
+	@Test
+	public void testModifyShop() throws ShopException, FileNotFoundException{
+		Shop shop = shopService.getByShopId(6L);
+		shop.setName("modified shop");
+		File img = new File("/home/jli/Pictures/image3.jpg");
+		InputStream is;
+		ShopExecution shopExecution;
+		try {
+			is = new FileInputStream(img);
+			shopExecution = shopService.modifyShop(shop, is, img.getName());
+		} catch (Exception e) {
+			throw new RuntimeException("errMsg: " + e.getMessage());
+		}
+		System.out.println(shopExecution.getShop().getImg());
+	}
+	
 	
 }

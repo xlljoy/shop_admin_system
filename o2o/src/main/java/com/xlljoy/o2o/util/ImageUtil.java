@@ -98,4 +98,20 @@ public class ImageUtil {
 			.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/watermark.jpg")), 0.25f)
 			.outputQuality(0.8f).toFile("/home/jli/Pictures/pic2.jpg");
 	}
+	
+	//check the storePath is the directory or file,
+	// if it is file directory, delete this file
+	// else if it is repository, delete the whole directory
+	public static void deleteFileOrPath(String storePath) {
+		File fileOrPath = new File(PathUtil.getImgBasePath() + storePath);
+		if (fileOrPath.exists()) {
+			if (fileOrPath.isDirectory()) {
+				File[] files = fileOrPath.listFiles();
+				for (int i = 0; i < files.length; i++) {
+					files[i].delete();
+				}
+			}
+			fileOrPath.delete();
+		}
+	}
 }

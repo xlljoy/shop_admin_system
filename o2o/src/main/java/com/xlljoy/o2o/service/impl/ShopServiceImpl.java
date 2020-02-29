@@ -17,15 +17,17 @@ import com.xlljoy.o2o.util.ImageUtil;
 import com.xlljoy.o2o.util.PathUtil;
 
 @Service
-public class ShopServiceImpl implements ShopService{
+public class ShopServiceImpl implements ShopService {
 	@Autowired
 	private ShopDao shopDao;
-	
+
 	@Override
 	@Transactional
 	public ShopExecution addShop(Shop shop, InputStream imgInputStream, String fileName) {
-		if (shop == null) return new ShopExecution(ShopStateEnum.NULL_SHOP);
-		if (imgInputStream == null) return new ShopExecution(ShopStateEnum.NULL_IMG);
+		if (shop == null)
+			return new ShopExecution(ShopStateEnum.NULL_SHOP);
+		if (imgInputStream == null)
+			return new ShopExecution(ShopStateEnum.NULL_IMG);
 		try {
 			shop.setEnableStatus(0);
 			shop.setCreateTime(new Date());
@@ -45,12 +47,12 @@ public class ShopServiceImpl implements ShopService{
 			if (effect < 1) {
 				throw new ShopException("failed to update shop img");
 			}
-		} catch(ShopException e) {
+		} catch (ShopException e) {
 			throw new ShopException("addShop error : " + e.getMessage());
 		}
 		return new ShopExecution(ShopStateEnum.CHECK, shop);
 	}
-	
+
 	public void addImg(InputStream imgInputStream, String fileName, Shop shop) {
 		Long shopId = shop.getId();
 		String targetAddrString = PathUtil.getShopImgPath(shopId);
@@ -59,10 +61,44 @@ public class ShopServiceImpl implements ShopService{
 	}
 
 	@Override
-	public ShopExecution updateShop(Shop shop) {
-		// TODO Auto-generated method stub
-		return null;
+	public ShopExecution modifyShop(Shop shop, InputStream imgInputStream, String fileName) 
+			throws ShopException {
+		if (shop == null || shop.getId() == null)
+			return new ShopExecution(ShopStateEnum.NULL_SHOP);
+		if (imgInputStream == null)
+			return new ShopExecution(ShopStateEnum.NULL_IMG);
+		
+		// 1 delete imgs
+		if (shop.getImg() != null && fileName != null) {
+			ImageUtil.deleteFileOrPath(shop.getImg());
+		}
+		// 2 modify shop info
+
+		try {
+			shop.setEnableStatus(0);
+			shop.setUpdateTime(new Date());
+			int effect = shopDao.updateShop(shop);
+			if (effect < 1) {
+				return new ShopExecution(ShopStateEnum.INNER_ERROR);
+				
+			} else {
+				try {
+					// save img to shop
+					shop = shopDao.queryByShopId(shop.getId());
+					addImg(imgInputStream, fileName, shop);
+				} catch (ShopException e) {
+					throw new ShopException("modify Shop Img Error: " + e.getMessage());
+				}
+			}
+		} catch (ShopException e) {
+			throw new ShopException("modifiyShop error : " + e.getMessage());
+		}
+		return new ShopExecution(ShopStateEnum.SUCCESS, shop);
 	}
-	
-	
+
+	@Override
+	public Shop getByShopId(Long id) {
+		Shop shop = shopDao.queryByShopId(id);
+		return shop;
+	}
 }
