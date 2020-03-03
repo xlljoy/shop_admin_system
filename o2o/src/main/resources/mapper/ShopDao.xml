@@ -32,6 +32,81 @@
 			<result column="sc_name" property="name" />
 		</association>
 	</resultMap>
+	<select id="queryShopList" resultMap="shopMap">
+		SELECT 
+			s.id,
+			s.name, 
+			s.shop_desc, 
+			s.addr, 
+			s.phone, 
+			s.img,
+			s.priority,
+			s.create_time, 
+			s.update_time, 
+			s.enable_status, 
+			s.advice,
+			z.zone_id,
+			z.name AS z_name,
+			sc.id AS sc_id,
+			sc.name AS sc_name
+		FROM
+		tb_shop s,
+		tb_zone z,
+		tb_shop_category sc
+			<where>
+				<if test="shopCondition.shopCategory != null and shopCondition.shopCategory.id != null">
+					and s.shop_category_id = #{shopCondition.shopCategory.id}
+				</if>
+				<if test="shopCondition.zone != null and shopCondition.zone.zoneId != null">
+					and s.zone_id = #{shopCondition.zone.zoneId}
+				</if>
+				<if test="shopCondition.enableStatus != null">
+					and s.enable_status = #{shopCondition.enableStatus}
+				</if>
+				<if test="shopCondition.name != null">
+					and s.name like '%${shopCondition.name}$'
+				</if>
+				<if test="shopCondition.owner != null and shopCondition.owner.id != null">
+					and s.owner_id = #{shopCondition.owner.id}
+				</if>
+				AND
+				s.zone_id = z.zone_id
+				AND
+				s.shop_category_id = sc.id
+			</where>
+		ORDER BY
+		s.priority DESC
+		LIMIT #{rowIndex},#{pageSize};
+	</select>
+	<select id="queryShopAmount" resultType="int">
+		SELECT 
+		count(1)
+		FROM
+		tb_shop s,
+		tb_zone z,
+		tb_shop_category sc
+		<where>
+			<if test="shopCondition.shopCategory != null and shopCondition.shopCategory.id != null">
+				and s.shop_category_id = #{shopCondition.shopCategory.id}
+			</if>
+			<if test="shopCondition.zone != null and shopCondition.zone.zoneId != null">
+				and s.zone_id = #{shopCondition.zone.zoneId}
+			</if>
+			<if test="shopCondition.enableStatus != null">
+				and s.enable_status = #{shopCondition.enableStatus}
+			</if>
+			<if test="shopCondition.name != null">
+				and s.name like '%${shopCondition.name}$'
+			</if>
+			<if test="shopCondition.owner != null and shopCondition.owner.id != null">
+				and s.owner_id = #{shopCondition.owner.id}
+			</if>
+			AND
+			s.zone_id = z.zone_id
+			AND
+			s.shop_category_id = sc.id
+		</where>
+	</select>
 	<select id="queryByShopId" resultMap="shopMap" parameterType="Long">
 		SELECT 
 			s.id,

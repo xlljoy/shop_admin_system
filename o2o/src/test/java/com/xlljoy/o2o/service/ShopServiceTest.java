@@ -25,6 +25,18 @@ public class ShopServiceTest extends BaseTest{
 	private ShopService shopService;
 	
 	@Test
+	public void testGetShopList() {
+		Shop shopCondition = new Shop();
+		User owner = new User();
+		owner.setId(1L);
+		shopCondition.setOwner(owner);
+		int pageIndex = 3;
+		int pageSize = 5;
+		ShopExecution se = shopService.getShopList(shopCondition, pageIndex, pageSize);
+		System.out.println(se.getCount());
+		System.out.println(se.getShopList().size());
+	}
+	@Test
 	public void testAddShop() {
 		Shop shop = new Shop();
 		shop.setAddr("lalalla");
@@ -76,6 +88,4 @@ public class ShopServiceTest extends BaseTest{
 		}
 		System.out.println(shopExecution.getShop().getImg());
 	}
-	
-	
 }

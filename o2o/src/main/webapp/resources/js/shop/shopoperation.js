@@ -2,10 +2,46 @@
  * 
  */
 $(function(){
+	var shopId = getQueryString('shopId');
+	var isEdit =  shopId ? true : false;
 	var initUrl = '/shopadmin/getshopinitinfo';
+	var getShopByIdUrl = '/shopadmin/getshopbyid?shopId=' + shopId; 
+	var modifyShopUrl = '/shopadmin/modifyshop';
 	var registerShopUrl = '/shopadmin/registershop';
 	//alert(initUrl);
-	getShopInitInfo();
+	if (isEdit) {
+		getShopById(shopId);
+	} else {
+		getShopInitInfo();
+	}
+	
+	function getShopById(shopId){
+		$.getJSON(getShopByIdUrl,function(data){
+			if(data.success){
+				var shop = data.shop;
+				$('#address').val(shop.addr);
+				$('#name').val(shop.name);
+				$('#phone').val(shop.phone);
+				$('#shop-desc').val(shop.shopDesc);
+			
+			var shopCategory = '<option data-id="' 
+				+ shop.shopCategory.id + '"selected>'
+				+ shop.shopCategory.name + '</option>';
+			
+				var tempZoneHtml = '';
+				data.zoneList.map(function(item,index){
+					tempZoneHtml += '<option data-id="' + item.zoneId + '">'
+					+ item.name + '</option>';
+				});
+				$('#shop-category').html(shopCategory);	
+				$('#shop-category').attr('disabled','disabled');
+				$('#zone').html(tempZoneHtml);
+				$("#zone option[data-id='"+shop.zone.zoneId+"']").attr("selected", "selected");	
+			}
+		});
+	}
+	
+	
 	function getShopInitInfo(){
 		$.getJSON(initUrl,function(data){
 			if(data.success){
@@ -24,9 +60,17 @@ $(function(){
 				$('#shop-category').html(tempShopCateHtml);	
 			}
 		});
+	}
+	
+
 		
+		
+
 		$('#submit').click(function(){
 			var shop = {};
+			if (isEdit) {
+				shop.id = shopId;
+			}
 			shop.name = $('#name').val();
 			shop.shopCategory = {
 				id: $('#shop-category').find('option').not(function(){
@@ -56,7 +100,7 @@ $(function(){
 			formData.append('verifyCodeActual', verifyCodeActual);
 			
 			$.ajax({
-				url: registerShopUrl,
+				url: isEdit ? modifyShopUrl : registerShopUrl,
 				type: 'POST',
 				data: formData,
 				contentType: false,
@@ -73,5 +117,4 @@ $(function(){
 				}
 			});
 		});
-	}
 })

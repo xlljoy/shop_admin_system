@@ -2,6 +2,7 @@ package com.xlljoy.o2o.service.impl;
 
 import java.io.InputStream;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import com.xlljoy.o2o.enums.ShopStateEnum;
 import com.xlljoy.o2o.exceptions.ShopException;
 import com.xlljoy.o2o.service.ShopService;
 import com.xlljoy.o2o.util.ImageUtil;
+import com.xlljoy.o2o.util.PageCalculator;
 import com.xlljoy.o2o.util.PathUtil;
 
 @Service
@@ -77,18 +79,14 @@ public class ShopServiceImpl implements ShopService {
 		try {
 			shop.setEnableStatus(0);
 			shop.setUpdateTime(new Date());
+
+			// save img to shop
+			shop = shopDao.queryByShopId(shop.getId());
+			addImg(imgInputStream, fileName, shop);
 			int effect = shopDao.updateShop(shop);
 			if (effect < 1) {
 				return new ShopExecution(ShopStateEnum.INNER_ERROR);
 				
-			} else {
-				try {
-					// save img to shop
-					shop = shopDao.queryByShopId(shop.getId());
-					addImg(imgInputStream, fileName, shop);
-				} catch (ShopException e) {
-					throw new ShopException("modify Shop Img Error: " + e.getMessage());
-				}
 			}
 		} catch (ShopException e) {
 			throw new ShopException("modifiyShop error : " + e.getMessage());
@@ -100,5 +98,21 @@ public class ShopServiceImpl implements ShopService {
 	public Shop getByShopId(Long id) {
 		Shop shop = shopDao.queryByShopId(id);
 		return shop;
+	}
+
+	@Override
+	public ShopExecution getShopList(Shop shopCondition, int pageIndex, int pageSize) {
+		ShopExecution se = new ShopExecution();
+		int rowIndex = PageCalculator.calculateRowIndex(pageIndex, pageSize);
+		List<Shop> shopList = shopDao.queryShopList(shopCondition, rowIndex, pageSize);
+		int count = shopDao.queryShopAmount(shopCondition);
+		if (shopList.size() > 0) {
+			se.setShopList(shopList);
+			se.setCount(count);
+			se.setState(ShopStateEnum.CHECK.getState());
+		} else {
+			se.setState(ShopStateEnum.INNER_ERROR.getState());
+		}
+		return se;
 	}
 }
