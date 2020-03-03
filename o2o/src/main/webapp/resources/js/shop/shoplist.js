@@ -43,7 +43,7 @@ $(function(){
 	}
 	function goShop(enableStatus, id) {
 		if (enableStatus == 1) {
-			return '<a href=" + "/shopadmin/shopmanage?shopId=' + id + '"> enter </a>';
+			return '<a href= "/shopadmin/shopmanage?shopId=' + id + '"> enter </a>';
 		} else {
 			return "";
 		}
