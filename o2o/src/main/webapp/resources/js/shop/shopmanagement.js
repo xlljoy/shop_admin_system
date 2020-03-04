@@ -9,6 +9,7 @@ $(function() {
 				shopId = data.shopId;
 			}
 			$('#shopInfo').attr('href','/shopadmin/shopoperation?shopId=' + shopId);
+			$('#product-cagetory-management').attr('href', '/shopadmin/productcategorymanagement')
 		}
 	})
 })

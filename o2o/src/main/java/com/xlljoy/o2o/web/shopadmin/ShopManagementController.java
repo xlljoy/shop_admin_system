@@ -45,7 +45,7 @@ public class ShopManagementController {
 	@ResponseBody
 	public Map<String, Object> getShopManagementInfo(HttpServletRequest request) {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
-		long shopId = (long)request.getSession().getAttribute("shopId");
+		long shopId = HttpServletRequestUtil.getLong(request, "shopId");
 		Shop shop;
 		if (shopId < 1) {
 			Object shopObject = request.getSession().getAttribute("currentShop");
