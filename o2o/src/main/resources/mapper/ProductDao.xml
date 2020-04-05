@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlljoy.o2o.dao.ProductDao">
+	<resultMap id="productMap" type="com.xlljoy.o2o.entity.Product" >
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="product_desc" property="productDesc" />
+		<result column="img_addr" property="imgAddr" />
+		<result column="normal_price" property="normalPrice" />
+		<result column="promotion_price" property="promotionPrice" />
+		<result column="priority" property="priority" />
+		<result column="point" property="point" />
+		<result column="create_time" property="createTime" />
+		<result column="update_time" property="updateTime" />
+		<result column="enable_status" property="enableStatus" />
+		<association property="shop" column="shop_id"
+			javaType="com.xlljoy.o2o.entity.Shop">
+			<id column="s_id" property="id" />
+			<result column="s_name" property="name" />
+		</association>
+		<association property="productCategory"
+			column="product_category_id"
+			javaType="com.xlljoy.o2o.entity.ProductCategory">
+			<id column="pc_id" property="id" />
+			<result column="pc_name" property="name" />
+		</association>
+		<collection property="productImgList" column="id"
+			ofType="com.xlljoy.o2o.entity.ProductImg">
+			<id column="id" property="id" />
+			<result column="img_addr" property="imgAddr" />
+			<result column="img_desc" property="imgDesc" />
+			<result column="priority" property="priority" />
+			<result column="create_time" property="createTime" />
+			<result column="product_id" property="productId" />
+		</collection>
+	</resultMap>
+	<select id="queryProductList" resultType="com.xlljoy.o2o.entity.Product">
+		SELECT 
+			id,
+			name, 
+			product_desc, 
+			img_addr, 
+			normal_price, 
+			promotion_price,
+			priority,
+			point,
+			create_time, 
+			update_time, 
+			enable_status, 
+			shop_id,
+			product_category_id
+		FROM
+		tb_product
+		ORDER BY
+		priority DESC
+	</select>
+	<select id="queryProductListBySearch" resultType="com.xlljoy.o2o.entity.Product">
+		SELECT 
+			id,
+			name, 
+			product_desc, 
+			img_addr, 
+			normal_price, 
+			promotion_price,
+			priority,
+			point,
+			create_time, 
+			update_time, 
+			enable_status, 
+			shop_id,
+			product_category_id
+		FROM
+		tb_product
+			<where>
+				<if test="productCondition.productCategory != null 
+					and productCondition.productCategory.id != null">
+					and product_category_id = #{productCondition.productCategory.id}
+				</if>
+				<if test="productCondition.shop != null 
+					and productCondition.shop.id != null">
+					and shop_id = #{productCondition.shop.id}
+				</if>
+				<if test="productCondition.enableStatus != null">
+					and enable_status = #{productCondition.enableStatus}
+				</if>
+				<if test="productCondition.name != null">
+					and name like '%${productCondition.name}%'
+				</if>
+			</where>
+		ORDER BY
+		priority DESC
+		LIMIT #{rowIndex},#{pageSize};
+	</select>
+		<select id="queryProductCount" resultType="int">
+		SELECT count(1) 
+		FROM
+		tb_product
+			<where>
+				<if test="productCondition.productCategory != null 
+					and productCondition.productCategory.id != null">
+					and product_category_id = #{productCondition.productCategory.id}
+				</if>
+				<if test="productCondition.shop != null 
+					and productCondition.shop.id != null">
+					and shop_id = #{productCondition.shop.id}
+				</if>
+				<if test="productCondition.enableStatus != null">
+					and enable_status = #{productCondition.enableStatus}
+				</if>
+				<if test="productCondition.name != null">
+					and name like '%${productCondition.name}%'
+				</if>
+			</where>
+	</select>
+	<select id="queryProductById" parameterType="Long" resultMap="productMap">
+		SELECT 
+			p.id,
+			p.name, 
+			p.product_desc, 
+			p.img_addr, 
+			p.normal_price, 
+			p.promotion_price,
+			p.priority,
+			p.point,
+			p.create_time, 
+			p.update_time, 
+			p.enable_status, 
+			p.shop_id AS s_id,
+			p.product_category_id AS pc_id
+		FROM
+		tb_product p,
+		tb_shop s,
+		tb_product_category pc
+		WHERE
+		p.shop_id = s.id
+		AND
+		p.product_category_id = pc.id
+		AND
+		p.id = #{id}
+	</select>
+	<select id="queryProductListByShopId" parameterType="Long" resultType="com.xlljoy.o2o.entity.Product">
+		SELECT 
+			id,
+			name, 
+			product_desc, 
+			img_addr, 
+			normal_price, 
+			promotion_price,
+			priority,
+			point,
+			create_time, 
+			update_time, 
+			enable_status, 
+			shop_id,
+			product_category_id
+		FROM
+		tb_product
+		WHERE
+		shop_id = #{shopId}
+		ORDER BY
+		priority DESC
+	</select>
+	<insert id="insertProduct" parameterType="com.xlljoy.o2o.entity.Product" 
+		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO
+		tb_product(
+			name, 
+			product_desc, 
+			img_addr, 
+			normal_price, 
+			promotion_price, 
+			priority,
+			point, 
+			enable_status, 
+			create_time,
+			update_time, 
+			product_category_id, 
+			shop_id)
+		VALUES
+		(
+		#{name},
+		#{productDesc},
+		#{imgAddr},
+		#{normalPrice},
+		#{promotionPrice},
+		#{priority},
+		#{point},
+		#{enableStatus},
+		#{createTime},
+		#{updateTime},
+		#{productCategory.id},
+		#{shop.id})
+	</insert>
+	<update id="updateProduct" parameterType="com.xlljoy.o2o.entity.Product">
+		UPDATE 
+		tb_product
+		<set>
+			<if test="name != null"> name = #{name},</if>
+			<if test="productDesc != null">product_desc=#{productDesc},</if>
+			<if test="imgAddr != null">img_addr=#{imgAddr},</if>
+			<if test="normalPrice != null">normal_price=#{normalPrice},</if>
+			<if test="promotionPrice != null">promotion_price=#{promotionPrice},</if>
+			<if test="priority != null">priority=#{priority},</if>
+			<if test="updateTime != null">update_time=#{updateTime},</if>
+			<if test="enableStatus != null">enable_status=#{enableStatus},</if>
+			<if test="productCategory != null and
+					 productCategory.id != null">product_category_id=#{productCategory.id}</if>
+		</set>
+		WHERE
+		id = #{id}		
+	</update>
+	<update id="updateProductCategoryToNull" parameterType="Long">
+		UPDATE 
+		tb_product
+		SET
+		product_category_id = NULL
+		WHERE
+		product_category_id = #{productCategoryId}		
+	</update>
+</mapper>
