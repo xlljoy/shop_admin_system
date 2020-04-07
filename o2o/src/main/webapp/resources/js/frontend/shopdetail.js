@@ -2,7 +2,7 @@ $(function(){
 	var loading = false;
 	var maxItems = 999;
 	var shopId = getQueryString('shopId');
-	var pageSize = 4;
+	var pageSize = 3;
 	var pageNum = 1;
 	var shopInfoUrl = '/frontend/getshopdetailinfo' + '?shopId=' + shopId;
 	var listProductsUrl = '/frontend/listproducts';
@@ -85,13 +85,13 @@ $(function(){
 				$('.list-div').append(productListHtml);
 				var total = $('.list-div .card').length;
 				if (total >= maxItems) {
-					//$('.infinite-scroll-preloader').hide();
-					$.detachInfiniteScroll($('.infinite-scroll'));
-					$('.infinite-scroll-preloader').remove();
+					$('.infinite-scroll-preloader').hide();
+//					$.detachInfiniteScroll($('.infinite-scroll'));
+//					$('.infinite-scroll-preloader').remove();
 				} 
-//				else {
-//					$('.infinite-scroll-preloader').show();
-//				}
+				else {
+					$('.infinite-scroll-preloader').show();
+				}
 				pageNum += 1;
 				loading = false;
 				$.refreshScroller();
@@ -126,6 +126,7 @@ $(function(){
 	$('#me').click(function(){
 		$.openPanel('#panel-right-demo');
 	});
+//	$('#search').on('input',function(e){
 	$('#search').on('change',function(e){
 		name = e.target.value;
 		$('.list-div').empty();
