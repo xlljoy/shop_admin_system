@@ -14,6 +14,7 @@
 			<list>
 				<!-- list files which needs decryption -->
 				<value>classpath:jdbc.properties</value>
+				<value>classpath:redis.properties</value>
 			</list>
 		</property>
 		<property name="fileEncoding" value="UTF-8"/>
