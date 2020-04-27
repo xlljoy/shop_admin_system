@@ -48,4 +48,27 @@ $(function(){
 			return "";
 		}
 	}
+	
+	$('#log-out').click(function(){	
+		var logoutUrl = '/local/logout';
+		$.ajax({
+			url: logoutUrl,
+			type: 'POST',
+			contentType: false,
+			processData: false,
+			cache: false,
+			dataType: 'json',
+			success:function(data){
+				if (data.success) {
+					$.toast('bye bye');
+					var userType = $('#log-out').attr('userType');
+					window.location.href = '/local/login?userType=' + userType;
+					return false;
+				}
+			},
+			error:function(data, error){
+				alert(error);
+			}
+		});
+	});
 })

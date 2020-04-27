@@ -29,4 +29,8 @@ public class PathUtil {
 		return imgPath.replace("/", separator);
 	}
 	
+	public static String getUserImgPath(long userId) {
+		String imgPath =  "/upload/item/user/" + userId + "/";
+		return imgPath.replace("/", separator);
+	}
 }

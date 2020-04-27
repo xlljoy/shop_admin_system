@@ -27,4 +27,8 @@ public class FrontendController {
 	private String productDetail() {
 		return "frontend/productdetail";
 	}
+	@RequestMapping(value="/userregister", method=RequestMethod.GET)
+	private String userRegister() {
+		return "frontend/userregister";
+	}
 }
