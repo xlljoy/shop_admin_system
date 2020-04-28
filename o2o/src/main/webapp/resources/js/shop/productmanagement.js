@@ -20,7 +20,7 @@ $(function(){
 					}
 					tempHtml += '<div class="row row-product"><div class="col-33">'
 						+ item.name + '</div><div class = "col-20">'
-						+ item.priority
+						+ item.point
 						+ '</div><div class = "col-40">'
 						// for edit
 						+ '<a href="#" class="edit" data-id="' + item.id + '"data-status="' + item.enableStatus + '">edit</a>'

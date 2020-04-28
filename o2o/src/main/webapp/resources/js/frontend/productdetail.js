@@ -25,6 +25,9 @@ $(function(){
 			$('#product-img').attr('src',product.imgAddr);
 			$('#product-update-time').text(new Date(product.updateTime).Format("yyyy-MM-dd"));
 			$('#product-name').text(product.name);
+			if (product.point != undefined) {
+				$('#product-point').text('got ' + product.point + ' points');
+			}
 			$('#product-desc').text(product.productDesc);
 			$('#normal-price').text(product.normalPrice);
 			$('#promotion-price').text(product.promotionPrice);
